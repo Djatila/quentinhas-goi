@@ -1,0 +1,17 @@
+Ajustei o layout mobile do cardápio online. As principais mudanças foram:
+
+1. **Header Mobile**:
+   - Reduzido padding para `0.75rem 1rem`
+   - Logo menor (45px)
+   - Texto truncado com ellipsis para evitar quebras
+   - Botões com `flex-shrink: 0` para não serem comprimidos
+   - Sem wrap (`flex-wrap: nowrap`)
+
+2. **Produtos**:
+   - Padding interno reduzido para `1rem`
+   - Gap entre cards de `1rem`
+
+3. **Filtros e Banner**:
+   - Ajustado `top: 70px` para compensar header menor
+
+**IMPORTANTE**: O arquivo CSS ficou corrompido durante a edição. Preciso restaurá-lo completamente.
