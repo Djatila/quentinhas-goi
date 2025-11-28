@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { ShoppingCart, Plus, Minus, X, Phone, MapPin, User, MessageSquare, CreditCard, Banknote, Clock, LogOut } from 'lucide-react'
 import { ClienteIdentificationModal } from '@/components/cliente/ClienteIdentificationModal'
+import { useToast } from '@/components/ui/Toast'
 import styles from './page.module.css'
 
 interface Produto {
@@ -32,6 +33,7 @@ interface DadosCliente {
 
 export default function CardapioPublicoPage() {
     const supabase = createClient()
+    const { showToast } = useToast()
     const [produtos, setProdutos] = useState<Produto[]>([])
     const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([])
     const [categoriaFiltro, setCategoriaFiltro] = useState<string>('todas')
@@ -191,7 +193,7 @@ export default function CardapioPublicoPage() {
         } else {
             setCarrinho([...carrinho, { ...produto, quantidade: 1 }])
         }
-        setMostrarCarrinho(true)
+        showToast('success', 'Adicionado ao carrinho', `${produto.nome} foi adicionado!`)
     }
 
     function alterarQuantidade(produtoId: string, delta: number) {
