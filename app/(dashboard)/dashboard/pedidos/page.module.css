@@ -6,11 +6,15 @@
 
 .header {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .stats {
     display: flex;
     gap: 1rem;
+    justify-content: center;
 }
 
 .statCard {
