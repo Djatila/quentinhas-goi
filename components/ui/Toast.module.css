@@ -1,6 +1,6 @@
 .toastContainer {
     position: fixed;
-    top: 150px;
+    top: 140px;
     right: 20px;
     z-index: 9999;
     display: flex;
@@ -73,7 +73,7 @@
 
 @media (max-width: 480px) {
     .toastContainer {
-        top: 110px;
+        top: 105px;
         right: 10px;
         left: 10px;
         align-items: center;
