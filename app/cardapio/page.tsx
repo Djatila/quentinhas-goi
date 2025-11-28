@@ -45,6 +45,7 @@ export default function CardapioPublicoPage() {
     const [pedidoConfirmado, setPedidoConfirmado] = useState<number | null>(null)
     const [modoComplemento, setModoComplemento] = useState(false)
     const [pedidoComplementoNumero, setPedidoComplementoNumero] = useState<number | null>(null)
+    const [carrinhoCarregado, setCarrinhoCarregado] = useState(false)
 
     // Customer identification
     const [mostrarIdentificacao, setMostrarIdentificacao] = useState(false)
@@ -67,6 +68,26 @@ export default function CardapioPublicoPage() {
         valor_para_troco: '',
         observacoes: ''
     })
+
+    // Carregar carrinho do localStorage
+    useEffect(() => {
+        const carrinhoSalvo = localStorage.getItem('carrinho')
+        if (carrinhoSalvo) {
+            try {
+                setCarrinho(JSON.parse(carrinhoSalvo))
+            } catch (e) {
+                console.error('Erro ao carregar carrinho:', e)
+            }
+        }
+        setCarrinhoCarregado(true)
+    }, [])
+
+    // Salvar carrinho no localStorage
+    useEffect(() => {
+        if (carrinhoCarregado) {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho))
+        }
+    }, [carrinho, carrinhoCarregado])
 
     useEffect(() => {
         loadProdutos()
@@ -306,6 +327,7 @@ export default function CardapioPublicoPage() {
                 setModoComplemento(false)
                 setPedidoComplementoNumero(null)
                 setCarrinho([])
+                localStorage.removeItem('carrinho')
                 setMostrarCheckout(false)
                 setMostrarCarrinho(false)
                 setPedidoConfirmado(pedidoComplementoNumero)
@@ -343,6 +365,7 @@ export default function CardapioPublicoPage() {
             } else if (data) {
                 setPedidoConfirmado(data.numero_pedido)
                 setCarrinho([])
+                localStorage.removeItem('carrinho')
                 setMostrarCheckout(false)
                 setMostrarCarrinho(false)
             }
